@@ -1,0 +1,1 @@
+{"name":"Location Critter Discovery","short_name":"Discover","description":"Discover and capture procedural critters near you.","start_url":"./","display":"standalone","background_color":"#0f1419","theme_color":"#1a2332","lang":"en","scope":"./","orientation":"portrait","icons":[{"src":"favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
