@@ -230,12 +230,21 @@ select {
 .encounter-card {
   width: 100%;
   text-align: left;
-  padding: 14px;
+  padding: 10px 14px;
   border-radius: var(--radius);
   border: 1px solid #2a384f;
   background: var(--surface);
   color: inherit;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.encounter-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .encounter-title {
@@ -350,6 +359,48 @@ select {
   top: 8px;
   right: 10px;
   color: #ffd700;
+}
+
+.creature-card .form-name {
+  display: block;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.chip-art {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.critter-svg {
+  display: block;
+  overflow: visible;
+  animation: critter-bob 3.4s ease-in-out infinite;
+}
+
+.critter-rare {
+  filter: drop-shadow(0 0 8px rgba(180, 220, 255, 0.45));
+}
+
+.critter-uncommon {
+  filter: drop-shadow(0 0 5px rgba(255, 214, 140, 0.28));
+}
+
+@keyframes critter-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .critter-svg {
+    animation: none;
+  }
 }
 
 .filter-row {

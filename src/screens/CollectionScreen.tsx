@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { CreatureView } from '../components/CreatureView'
+import { CritterView } from '../components/CritterView'
 import { rarityFromScore } from '../model/creatureGen'
 import type { BodyArchetype, Creature } from '../model/types'
 import { useGame } from '../state/GameState'
@@ -34,7 +34,7 @@ export function CollectionScreen() {
     <div className="screen">
       <header className="screen-header">
         <h1>Collection</h1>
-        <p className="muted">{save.creatures.length} creatures</p>
+        <p className="muted">{save.creatures.length} critters</p>
       </header>
       <div className="filter-row">
         <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
@@ -43,7 +43,7 @@ export function CollectionScreen() {
           <option value="archetype">Archetype</option>
         </select>
         <select value={filterArchetype} onChange={(e) => setFilterArchetype(e.target.value as BodyArchetype | 'all')}>
-          <option value="all">All archetypes</option>
+          <option value="all">All forms</option>
           <option value="quadruped">Quadruped</option>
           <option value="biped">Biped</option>
           <option value="serpentine">Serpentine</option>
@@ -56,12 +56,12 @@ export function CollectionScreen() {
         </label>
       </div>
       <ul className="creature-grid">
-        {sorted.length === 0 && <li className="empty">Capture encounters from the Explore tab.</li>}
+        {sorted.length === 0 && <li className="empty">No critters yet. Look around on the Explore tab.</li>}
         {sorted.map((c) => (
           <li key={c.id}>
             <button type="button" className="creature-card" onClick={() => setSelected(c)}>
-              <CreatureView genome={c.genome} mutation={c.mutation} size={88} />
-              <span>{c.genome.bodyArchetype}</span>
+              <CritterView genome={c.genome} mutation={c.mutation} size={104} />
+              <span className="form-name">{c.genome.bodyArchetype.replace(/_/g, ' ')}</span>
               <span className="muted">Lv {c.level} · {rarityFromScore(c.genome.rarityScore)}</span>
               {c.favorite && <span className="star">★</span>}
             </button>
