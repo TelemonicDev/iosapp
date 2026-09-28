@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CreatureView } from '../components/CreatureView'
+import { CritterView } from '../components/CritterView'
 import { rarityFromScore } from '../model/creatureGen'
 import type { EncounterPreview } from '../model/types'
 import { useGame } from '../state/GameState'
@@ -30,10 +30,10 @@ export function EncounterPanel({ encounter, onClose, onCaptured }: EncounterPane
           ×
         </button>
         <div className="encounter-header">
-          <CreatureView genome={encounter.genome} size={140} />
+          <CritterView genome={encounter.genome} size={148} />
           <div>
             <p className="eyebrow">{encounter.biome.replace(/_/g, ' ')}</p>
-            <h2>Wild encounter</h2>
+            <h2>Wild critter</h2>
             <p className="muted">{encounter.reason}</p>
           </div>
         </div>

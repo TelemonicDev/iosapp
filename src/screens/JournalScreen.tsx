@@ -17,7 +17,7 @@ export function JournalScreen() {
         <p>Mutations logged: {j.mutationsLogged}</p>
       </section>
       <section className="journal-block">
-        <h2>Body archetypes seen</h2>
+        <h2>Critter forms seen</h2>
         {j.archetypesSeen.length === 0 ? (
           <p className="muted">None yet.</p>
         ) : (

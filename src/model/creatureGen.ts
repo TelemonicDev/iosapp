@@ -4,6 +4,7 @@ import {
   RARITY_CAPTURE_PENALTY,
 } from '../config/balance'
 import { mulberry32, pickWeighted } from '../util/rng'
+import { generatePalette } from './critterLook'
 import type {
   Affinity,
   BiomeId,
@@ -14,15 +15,6 @@ import type {
   PatternId,
   RarityTier,
 } from './types'
-
-const PALETTES: { primary: string; secondary: string; accent: string }[] = [
-  { primary: '#5cb85c', secondary: '#3d8b3d', accent: '#f0ad4e' },
-  { primary: '#5bc0de', secondary: '#31b0d5', accent: '#ffffff' },
-  { primary: '#d9534f', secondary: '#c9302c', accent: '#f7e1b5' },
-  { primary: '#9966cc', secondary: '#7744aa', accent: '#ffcc66' },
-  { primary: '#f0ad4e', secondary: '#ec971f', accent: '#5bc0de' },
-  { primary: '#778899', secondary: '#556677', accent: '#aaddff' },
-]
 
 const PASSIVE_TRAITS = [
   'Steady footing',
@@ -94,13 +86,14 @@ export function captureRateForGenome(genome: Genome): number {
 export function generateGenome(
   seed: number,
   biome: BiomeId,
-  options?: { biasArchetype?: BodyArchetype },
+  options?: { biasArchetype?: BodyArchetype; forceArchetype?: BodyArchetype },
 ): Genome {
   const rng = mulberry32(seed)
   let bodyArchetype = pickWeighted(rng, BIOME_ARCHETYPES[biome])
   if (options?.biasArchetype && rng() < 0.55) {
     bodyArchetype = options.biasArchetype
   }
+  if (options?.forceArchetype) bodyArchetype = options.forceArchetype
 
   const patterns = COMPATIBLE_APPENDAGES[bodyArchetype]
   const pattern = patterns[Math.floor(rng() * patterns.length)]!
@@ -131,7 +124,7 @@ export function generateGenome(
   const roles: CombatRole[] = ['striker', 'guardian', 'support', 'controller']
   const combatRole = roles[Math.floor(rng() * roles.length)]!
 
-  const palette = PALETTES[Math.floor(rng() * PALETTES.length)]!
+  const palette = generatePalette(rng, biome)
   const passiveTrait = PASSIVE_TRAITS[Math.floor(rng() * PASSIVE_TRAITS.length)]!
 
   let rarityScore = 0
@@ -156,6 +149,7 @@ export function generateGenome(
       speed: Math.floor(rng() * 5) + 3,
     },
     rarityScore,
+    visualSalt: Math.floor(rng() * 0x7fffffff),
   }
 }
 

@@ -1,4 +1,4 @@
-import { CreatureView } from '../components/CreatureView'
+import { CritterView } from '../components/CritterView'
 import { BIOME_LABELS } from '../location/geo'
 import { rarityFromScore } from '../model/creatureGen'
 import type { Creature } from '../model/types'
@@ -20,10 +20,10 @@ export function CreatureDetailScreen({ creature, onBack }: CreatureDetailScreenP
         ← Collection
       </button>
       <div className="showcase">
-        <CreatureView genome={g} mutation={creature.mutation} size={160} />
+        <CritterView genome={g} mutation={creature.mutation} size={168} />
         <div>
-          <p className="eyebrow">{g.bodyArchetype} · Gen {creature.generation}</p>
-          <h1>{creature.nickname ?? 'Unnamed individual'}</h1>
+          <p className="eyebrow">{g.bodyArchetype.replace(/_/g, ' ')} · Gen {creature.generation}</p>
+          <h1>{creature.nickname ?? 'Unnamed critter'}</h1>
           <p className="muted">
             {BIOME_LABELS[creature.origin.biome]} · {creature.origin.placeLabel}
           </p>

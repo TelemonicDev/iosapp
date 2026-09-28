@@ -35,6 +35,8 @@ export interface Genome {
   passiveTrait: string
   statTendencies: { power: number; resilience: number; speed: number }
   rarityScore: number
+  /** Stable silhouette seed. Color mutations must not rewrite this. */
+  visualSalt?: number
 }
 
 export interface CreatureOrigin {

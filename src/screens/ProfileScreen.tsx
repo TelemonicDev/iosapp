@@ -20,9 +20,9 @@ export function ProfileScreen() {
       </header>
       <div className="profile-card">
         <h2>{p.displayName}</h2>
-        <p>Starter archetype: {p.starterArchetype}</p>
+        <p>Starter form: {p.starterArchetype.replace(/_/g, ' ')}</p>
         <p>Home biome: {BIOME_LABELS[p.homeBiome]}</p>
-        <p>Creatures: {save.creatures.length}</p>
+        <p>Critters: {save.creatures.length}</p>
         <p>Biomes in journal: {save.journal.biomesVisited.length}</p>
       </div>
       <section className="journal-block">

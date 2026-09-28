@@ -2,6 +2,7 @@ import 'leaflet/dist/leaflet.css'
 import { useMemo, useState } from 'react'
 import { Circle, MapContainer, Marker, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
+import { CritterView } from '../components/CritterView'
 import { BIOME_LABELS, type GeoPosition } from '../location/geo'
 import type { BiomeId, EncounterPreview } from '../model/types'
 import { useGame } from '../state/GameState'
@@ -104,14 +105,17 @@ export function MapScreen() {
       ) : (
         <ul className="encounter-list">
           {active.length === 0 && (
-            <li className="empty">No active encounters. Tap look around or refresh home range.</li>
+            <li className="empty">No critters nearby. Look around or refresh home range.</li>
           )}
           {active.map((enc) => (
             <li key={enc.id}>
               <button type="button" className="encounter-card" onClick={() => setSelected(enc)}>
-                <span className="encounter-title">{enc.genome.bodyArchetype.replace(/_/g, ' ')}</span>
-                <span className="muted">{enc.reason}</span>
-                <span className="tag">{Math.round(enc.captureRate * 100)}% capture</span>
+                <CritterView genome={enc.genome} size={72} />
+                <span className="encounter-copy">
+                  <span className="encounter-title">{enc.genome.bodyArchetype.replace(/_/g, ' ')}</span>
+                  <span className="muted">{enc.reason}</span>
+                  <span className="tag">{Math.round(enc.captureRate * 100)}% capture</span>
+                </span>
               </button>
             </li>
           ))}
