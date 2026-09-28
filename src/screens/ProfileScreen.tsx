@@ -1,5 +1,6 @@
 import { MAX_CAPTURE_CHARGES } from '../config/balance'
 import { BIOME_LABELS } from '../location/geo'
+import type { BiomeId } from '../model/types'
 import { useGame } from '../state/GameState'
 
 function formatMs(ms: number): string {
@@ -8,7 +9,7 @@ function formatMs(ms: number): string {
 }
 
 export function ProfileScreen() {
-  const { save, msUntilNextCharge } = useGame()
+  const { save, msUntilNextCharge, setHomeBiome } = useGame()
   const p = save.profile
   if (!p) return null
 
@@ -21,7 +22,16 @@ export function ProfileScreen() {
       <div className="profile-card">
         <h2>{p.displayName}</h2>
         <p>Starter form: {p.starterArchetype.replace(/_/g, ' ')}</p>
-        <p>Home biome: {BIOME_LABELS[p.homeBiome]}</p>
+        <label className="field">
+          Home area
+          <select value={p.homeBiome} onChange={(e) => setHomeBiome(e.target.value as BiomeId)}>
+            {(Object.keys(BIOME_LABELS) as BiomeId[]).map((id) => (
+              <option key={id} value={id}>
+                {BIOME_LABELS[id]}
+              </option>
+            ))}
+          </select>
+        </label>
         <p>Critters: {save.creatures.length}</p>
         <p>Biomes in journal: {save.journal.biomesVisited.length}</p>
       </div>

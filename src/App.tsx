@@ -18,7 +18,7 @@ function MainApp() {
 
   return (
     <div className="app-shell">
-      <main className="app-main">
+      <main className={tab === 'map' ? 'app-main is-play' : 'app-main'}>
         {tab === 'map' && <MapScreen />}
         {tab === 'collection' && <CollectionScreen />}
         {tab === 'journal' && <JournalScreen />}
