@@ -13,8 +13,8 @@ export default defineConfig({
         name: 'Location Critter Discovery',
         short_name: 'Discover',
         description: 'Discover and capture procedural critters near you.',
-        theme_color: '#1a2332',
-        background_color: '#0f1419',
+        theme_color: '#f4ead6',
+        background_color: '#f4ead6',
         display: 'standalone',
         orientation: 'portrait',
         icons: [

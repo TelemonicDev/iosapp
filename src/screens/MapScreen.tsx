@@ -89,7 +89,7 @@ export function MapScreen() {
             {position && (
               <>
                 <Marker position={[position.lat, position.lng]} icon={markerIcon} />
-                <Circle center={[position.lat, position.lng]} radius={position.accuracy} pathOptions={{ color: '#6cf', fillOpacity: 0.08 }} />
+                <Circle center={[position.lat, position.lng]} radius={position.accuracy} pathOptions={{ color: '#e25b7a', fillOpacity: 0.08 }} />
               </>
             )}
             {active.map((enc) => (
