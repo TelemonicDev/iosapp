@@ -481,23 +481,25 @@ select {
 }
 
 .critter-pixel {
+  position: relative;
   display: block;
+  top: 0;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  animation: critter-bob 1.6s linear infinite;
+  animation: critter-bob 1.6s step-end infinite;
 }
 
 @keyframes critter-bob {
   0%,
-  42% {
-    transform: translateY(0);
+  45% {
+    top: 0;
   }
   50%,
-  92% {
-    transform: translateY(-2px);
+  95% {
+    top: calc(var(--bob, 4px) * -1);
   }
   100% {
-    transform: translateY(0);
+    top: 0;
   }
 }
 
